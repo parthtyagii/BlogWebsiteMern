@@ -1,0 +1,13 @@
+.main-container {
+    width: 100%;
+    /* min-height: 90vh; */
+    /* height: auto; */
+    /* background-color: darkseagreen; */
+    padding: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    grid-row-gap: 20px;
+}

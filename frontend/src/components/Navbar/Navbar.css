@@ -3,6 +3,7 @@
 .navbar-container {
     width: 100%;
     min-height: 10vh;
+    padding: 2px;
     /* background-color: antiquewhite; */
     font-family: 'Noto Sans JP', sans-serif;
     font-size: medium;

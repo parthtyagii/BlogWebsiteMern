@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Dancing+Script&display=swap');
+
+.blog-container {
+    width:95%;
+    height: auto;
+    /* background-color: cadetblue; */
+    font-family: 'Noto Sans JP', sans-serif;
+    border:1px solid gray;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.blogImg {
+    width: 100%;
+    height: 180px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.blogImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blogImg .authorImg {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+
+    position: absolute;
+    top: 145px;
+    left: 330px;
+}
+
+.blogTitle {
+    width: 100%;
+    min-height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 1.3rem;
+    word-spacing: 5px;
+    letter-spacing: 1px;
+    /* line-height: 50px; */
+    word-wrap: break-word;
+    font-weight: bolder;
+    /* background-color: aqua; */
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.blogDesc {
+    width: 100%;
+    min-height: 00px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: .9rem;
+    font-weight: bolder;
+    text-align: justify;
+    /* background-color: aqua; */
+    letter-spacing: 1px;
+    font-family: 'Amatic SC', cursive;
+    color: #495057;
+
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.blogFooter {
+    width: 100%;
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: .8rem;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #6c757d;
+
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
