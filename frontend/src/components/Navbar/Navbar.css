@@ -61,6 +61,8 @@
 
 .navListItem {
     /* border: 1px solid black; */
+    height: auto;
+    width: auto;
     cursor: pointer;
     margin-left: 8px;
     margin-right: 8px;
@@ -75,4 +77,5 @@
     width: 40px;
     border-radius: 50%;
     border: 1px solid gray;
+    object-fit: cover;
 }
