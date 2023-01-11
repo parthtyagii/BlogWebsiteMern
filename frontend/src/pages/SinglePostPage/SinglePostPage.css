@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Dancing+Script&family=Quicksand&display=swap');
+
+.singlePostContainer {
+    width: 100%;
+    min-height: 100vh;
+    /* background-color: aquamarine; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.singlePostImg {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.singlePostImg img {
+    width: 100%;
+    height: 70vh;
+    border-radius: .2rem;
+}
+
+.singlePostTitle {
+    width: 100%;
+    min-height: 10vh;
+    padding: 20px;
+    /* background-color: aqua; */
+    font-family: 'Noto Sans JP', sans-serif;
+    word-wrap: break-word;
+    font-weight: 900;
+    letter-spacing: .1rem;
+    word-spacing: .2rem;
+    
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.singlePostTitleText {
+    width: 85%;
+    height: 100%;
+    /* background-color: chartreuse; */
+    font-size: x-large;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.singlePostEdit {
+    width: 15%;
+    height: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.singlePostEdit button {
+    width: 60px;
+    height: 40px;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: .5rem;
+    border: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editIcon {
+    font-size: 20px;
+}
+
+.singlePostDesc {
+    width: 100%;
+    min-height: 20vh;
+    padding: 20px;
+    letter-spacing: 1px;
+    line-height: 1.5rem;
+    /* text-indent: 5rem; */
+    font-family: 'Quicksand', sans-serif;
+    word-spacing: .1rem;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.singlePostAuthor {
+    width: 100%;
+    min-height: 10vh;
+    padding: 20px;
+    font-family: 'Noto Sans JP', sans-serif;
+
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.singlePostAuthor span{
+    font-weight: 600;
+    margin-left: 5px;
+}
+
