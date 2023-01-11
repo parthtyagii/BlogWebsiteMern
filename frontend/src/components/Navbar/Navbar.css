@@ -4,10 +4,12 @@
     width: 100%;
     min-height: 10vh;
     padding: 2px;
-    /* background-color: antiquewhite; */
+    background-color: white;
     font-family: 'Noto Sans JP', sans-serif;
     font-size: medium;
     border: 1px solid gray;
+    position: sticky;
+    top: 0;
 
     display: grid;
     grid-template-columns: 20% 60% 20%;

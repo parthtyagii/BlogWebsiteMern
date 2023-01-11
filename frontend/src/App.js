@@ -4,6 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 import Main from './components/Main/Main';
 import Homepage from './pages/Homepage/Homepage';
 import SinglePostPage from './pages/SinglePostPage/SinglePostPage';
+import CreateBlog from './pages/CreateBlog/CreateBlog';
 
 
 
@@ -13,7 +14,9 @@ function App() {
       {/* <Navbar /> */}
       {/* <Main /> */}
       {/* <Homepage /> */}
-      <SinglePostPage />
+      {/* <SinglePostPage /> */}
+      <CreateBlog />
+
     </div>
   );
 }
