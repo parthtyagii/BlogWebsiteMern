@@ -6,6 +6,8 @@ import Homepage from './pages/Homepage/Homepage';
 import SinglePostPage from './pages/SinglePostPage/SinglePostPage';
 import CreateBlog from './pages/CreateBlog/CreateBlog';
 import AccountPage from './pages/AccountPage/AccountPage';
+import Login from './pages/Authentication/Login';
+import Registration from './pages/Authentication/Registration';
 
 
 
@@ -15,9 +17,11 @@ function App() {
       {/* <Navbar /> */}
       {/* <Main /> */}
       {/* <Homepage /> */}
-      <SinglePostPage />
+      {/* <SinglePostPage /> */}
       {/* <CreateBlog /> */}
       {/* <AccountPage /> */}
+      {/* <Login /> */}
+      <Registration />
     </div>
   );
 }
