@@ -14,7 +14,7 @@ function Login() {
                 <div className="authCredentials">
 
                     <div className="authTitle">
-                        LOGIN
+                        Login
                     </div>
 
                     <div className="authInput">

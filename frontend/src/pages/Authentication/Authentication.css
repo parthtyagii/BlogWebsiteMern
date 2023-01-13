@@ -111,11 +111,12 @@
 }
 
 .authSwap button {
-    height: 8vh;
+    height: auto;
     width: auto;
     font-size: 1rem;
     border-radius: 0.5rem;
     border: none;
+    margin-top: 0.5rem;
     color: black;
     background-color: transparent;
     font-family: 'Roboto', sans-serif;
