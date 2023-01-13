@@ -5,6 +5,7 @@ import Main from './components/Main/Main';
 import Homepage from './pages/Homepage/Homepage';
 import SinglePostPage from './pages/SinglePostPage/SinglePostPage';
 import CreateBlog from './pages/CreateBlog/CreateBlog';
+import AccountPage from './pages/AccountPage/AccountPage';
 
 
 
@@ -14,9 +15,9 @@ function App() {
       {/* <Navbar /> */}
       {/* <Main /> */}
       {/* <Homepage /> */}
-      {/* <SinglePostPage /> */}
-      <CreateBlog />
-
+      <SinglePostPage />
+      {/* <CreateBlog /> */}
+      {/* <AccountPage /> */}
     </div>
   );
 }
