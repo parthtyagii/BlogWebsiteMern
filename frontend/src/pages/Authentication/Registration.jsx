@@ -31,9 +31,9 @@ function Registration() {
                         <button>REGISTER</button>
                     </div>
 
-                    <div className="authSwap">
+                    {/* <div className="authSwap">
                         <button>Already registered?</button>
-                    </div>
+                    </div> */}
 
                 </div>
 

@@ -5,6 +5,19 @@ import Navbar from '../../components/Navbar/Navbar';
 
 
 function Login() {
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        try {
+            
+        }
+        catch (e) {
+            console.log('error during login!');
+            console.log(e);
+        }
+    };
+
+
     return (
         <>
             <Navbar />
@@ -13,25 +26,30 @@ function Login() {
 
                 <div className="authCredentials">
 
-                    <div className="authTitle">
-                        Login
-                    </div>
+                    <form onSubmit={submitHandler}>
 
-                    <div className="authInput">
-                        <label>Username</label>
-                        <input type="text" placeholder='parth'/>
+                        <div className="authTitle">
+                            Login
+                        </div>
 
-                        <label>Password</label>
-                        <input type="password" />
-                    </div>
 
-                    <div className="authSubmit">
-                        <button>LOGIN</button>
-                    </div>
+                        <div className="authInput">
+                            <label>Username</label>
+                            <input type="text" placeholder='parth' />
 
-                    <div className="authSwap">
+                            <label>Password</label>
+                            <input type="password" />
+                        </div>
+
+                        <div className="authSubmit">
+                            <button>LOGIN</button>
+                        </div>
+
+                    </form>
+
+                    {/* <div className="authSwap">
                         <button>Are you registered?</button>
-                    </div>
+                    </div> */}
 
                 </div>
 
