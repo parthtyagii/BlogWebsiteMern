@@ -64,7 +64,7 @@ function Login() {
                         </div>
 
                         <div className="authSubmit">
-                            <button>LOGIN</button>
+                            <button type='submit'>LOGIN</button>
                         </div>
 
                     </form>

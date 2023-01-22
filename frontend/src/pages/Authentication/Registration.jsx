@@ -3,6 +3,7 @@ import './Authentication.css';
 import Navbar from '../../components/Navbar/Navbar';
 import { useState } from 'react';
 import axios from 'axios';
+import { v4 as uuid } from 'uuid';
 
 
 function Registration() {
@@ -16,8 +17,8 @@ function Registration() {
         e.preventDefault();
         setError(false);
         try {
-            const response = await axios.post('/auth/registration', { username, email, password });
-            console.log(response);
+            const response = await axios.post('/auth/registration', { username, email, password, userId: uuid() });
+            // console.log(response);
             return (response.data && window.location.replace('/login'));
         }
         catch (e) {
@@ -53,7 +54,7 @@ function Registration() {
                         </div>
 
                         <div className="authSubmit">
-                            <button>REGISTER</button>
+                            <button type='submit'>REGISTER</button>
                         </div>
 
                     </form>

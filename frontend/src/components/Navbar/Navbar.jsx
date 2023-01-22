@@ -10,8 +10,8 @@ function Navbar() {
 
     const logoutHandler = () => {
         dispatch({ type: 'LOGOUT' });
+        window.location.replace('/');
     }
-    // console.log(user);
 
     return (
         <div className='navbar-container'>

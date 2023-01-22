@@ -1,8 +1,9 @@
 import React from 'react'
 import './Blog.css';
+import { Link } from 'react-router-dom';
 
 
-function Blog() {
+function Blog({ title, desc, postId }) {
     return (
         <div className="blog-container">
 
@@ -11,15 +12,15 @@ function Blog() {
                 <img className='authorImg' src="https://wallpaper.dog/large/20417959.jpg" alt="" />
             </div>
 
-            <div className="blogTitle">
-                JENNIFER LAWRENCE
-            </div>
+            <Link className='link' to={`/post/${postId}`}>
+                <div className="blogTitle">
+                    {title}
+                </div>
 
-            <div className="blogDesc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quasi laudantium suscipit quam!
-                Tempore explicabo dolor debitis ratione, magni impedit ipsam cupiditate porro officiis quod
-                nihil, sapiente voluptate, velit quaerat!
-            </div>
+                <div className="blogDesc">
+                    {desc}
+                </div>
+            </Link>
 
             <div className="blogFooter">
                 January 10, 2023

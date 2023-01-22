@@ -18,7 +18,7 @@ function AccountPage() {
                     <img src="https://www.teahub.io/photos/full/298-2984607_jennifer-lawrence.jpg" alt="" />
 
                     <label htmlFor='accountPageProfilePic'>
-                        <i class="fa-solid fa-plus"></i>
+                        <i className="fa-solid fa-plus"></i>
                     </label>
                     <input type="file" id='accountPageProfilePic' />
                 </div>
