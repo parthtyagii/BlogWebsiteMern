@@ -37,7 +37,17 @@ app.use('/blog/api/user', userRoute);
 
 //---------------------------------------------------------------------------
 
-
+// app.get('/blog/api/aboutUser', async (req, res) => {
+//     try {
+//         if (req.session.user) {
+//             return res.json(req.session.user);
+//         }
+//     }
+//     catch (e) {
+//         console.log('cannot get aboutUser');
+//         console.log(e);
+//     }
+// });
 
 
 

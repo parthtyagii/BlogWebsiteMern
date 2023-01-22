@@ -9,13 +9,12 @@ import { useReducer, useRef } from 'react';
 
 function Login() {
 
-    const { dispatch } = useContext(BlogContext);
+    const { dispatch, user } = useContext(BlogContext);
     const userRef = useRef();
     const passwordRef = useRef();
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        // console.log(userRef.current.value);
         dispatch({ type: 'LOGIN_START' });
         try {
             const response = await axios.post('/auth/login', {
@@ -25,7 +24,8 @@ function Login() {
 
             if (response.data !== 'Wrong credentials!') {
                 dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
-                console.log('You are logged in now!');
+                // console.log('You are logged in now!');
+                window.location.replace('/');
             }
             else {
                 console.log(response.data);
