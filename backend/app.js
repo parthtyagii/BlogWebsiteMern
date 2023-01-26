@@ -5,6 +5,8 @@ const authRoute = require('./routes/auth');
 const postsRoute = require('./routes/posts');
 const userRoute = require('./routes/user');
 const cors = require('cors');
+const multer = require('multer');
+const path = require('path');
 
 //---------------------------------------------------------------------------
 
@@ -34,20 +36,10 @@ mongoose.connect("mongodb://localhost:27017/BlogMERN", {
 app.use('/blog/api/auth', authRoute);
 app.use('/blog/api/posts', postsRoute);
 app.use('/blog/api/user', userRoute);
+// app.use('/images', express.static(path.join(__dirname, '/profileImages')));
 
 //---------------------------------------------------------------------------
 
-// app.get('/blog/api/aboutUser', async (req, res) => {
-//     try {
-//         if (req.session.user) {
-//             return res.json(req.session.user);
-//         }
-//     }
-//     catch (e) {
-//         console.log('cannot get aboutUser');
-//         console.log(e);
-//     }
-// });
 
 
 

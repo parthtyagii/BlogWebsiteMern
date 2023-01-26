@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const USER = require('../models/users');
+const multer  = require('multer');
+const upload = multer({ dest: './profileImages' });
 
 //get user...
 router.get('/:id', async (req, res) => {
@@ -16,7 +18,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //update user...
-router.put('/:id', async (req, res) => {
+router.put('/:id',upload.single('accountPic') ,async (req, res) => {
     try {
         const { id } = req.params;
         const user = await USER.findOne({ userId: id });
@@ -25,7 +27,7 @@ router.put('/:id', async (req, res) => {
         user.password = req.body.password;
         await user.save();
 
-        res.json("Updated!");
+        res.json(user);
     }
     catch (e) {
         console.log('cannot update user!');
@@ -46,17 +48,6 @@ router.delete('/:id', async (req, res) => {
         console.log(e);
     }
 })
-
-
-
-
-
-
-
-
-
-
-
 
 
 

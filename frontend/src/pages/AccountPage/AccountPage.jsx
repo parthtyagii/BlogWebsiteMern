@@ -1,12 +1,73 @@
 import React from 'react';
 import './AccountPage.css';
 import Navbar from '../../components/Navbar/Navbar';
-
+import { BlogContext } from '../../context/Context';
+import { useContext } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 
 
 function AccountPage() {
+
+    const { user, dispatch } = useContext(BlogContext);
+    const [newUsername, setNewUsername] = useState('');
+    const [newEmail, setNewEmail] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [profileImage, setProfileImage] = useState(null);
+
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        dispatch({ type: 'UPDATE_START' });
+
+        try {
+            const response = await axios.put(`/user/${user.userId}`, {
+                username: newUsername,
+                email: newEmail,
+                password: newPassword
+            });
+
+            dispatch({ type: 'UPDATE_SUCCESS', payload: response.data });
+            window.location.replace(`/account/${user.userId}`);
+        }
+        catch (e) {
+            dispatch({ type: 'UPDATE_FAILURE' });
+            console.log('cannot update profile!');
+            console.log(e);
+        }
+    }
+
+    const deleteHandler = async (e) => {
+        try {
+            const response = await axios.delete(`/user/${user.userId}`);
+            dispatch({ type: 'LOGOUT' });
+        }
+        catch (e) {
+            console.log('cannot delete account!');
+            console.log(e);
+        }
+    }
+
+    useEffect(() => {
+        if (newUsername === '') {
+            setNewUsername(user.username);
+        }
+
+        if (newEmail === '') {
+            setNewEmail(user.email);
+        }
+
+        if (newPassword === '') {
+            setNewPassword(user.password);
+        }
+
+        // console.log(newUsername, newEmail, newPassword);
+
+    }, [newUsername, newEmail, newPassword]);
+
     return (
         <>
 
@@ -14,34 +75,39 @@ function AccountPage() {
 
             <div className="accountPageContainer">
 
-                <div className="accountPageImg">
-                    <img src="https://www.teahub.io/photos/full/298-2984607_jennifer-lawrence.jpg" alt="" />
+                <form onSubmit={submitHandler} encType="multipart/form-data">
 
-                    <label htmlFor='accountPageProfilePic'>
-                        <i className="fa-solid fa-plus"></i>
-                    </label>
-                    <input type="file" id='accountPageProfilePic' />
-                </div>
+                    <div className="accountPageImg">
+                        <img src="https://www.teahub.io/photos/full/298-2984607_jennifer-lawrence.jpg" alt="" />
 
-                <div className="accountPageCredentials">
+                        <label htmlFor='accountPageProfilePic'>
+                            <i className="fa-solid fa-plus"></i>
+                        </label>
+                        <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} accept="image/*" name='accountPic' id='accountPageProfilePic' />
+                    </div>
 
-                    <label>Username</label>
-                    <input type="text" placeholder='Parth' />
 
-                    <label>Email</label>
-                    <input type="email" placeholder='parth@gmail.com' />
+                    <div className="accountPageCredentials">
 
-                    <label>Password</label>
-                    <input type="password" />
+                        <label>Username</label>
+                        <input type="text" onChange={(e) => setNewUsername(e.target.value)} placeholder={`${user.username}`} />
 
-                </div>
+                        <label>Email</label>
+                        <input type="email" onChange={(e) => setNewEmail(e.target.value)} placeholder={`${user.email}`} />
 
-                <div className="accountPageUpdate">
-                    <button>UPDATE</button>
-                </div>
+                        <label>Password</label>
+                        <input type="password" onChange={(e) => setNewPassword(e.target.value)} />
+
+                    </div>
+
+                    <div className="accountPageUpdate">
+                        <button onSubmit={submitHandler}>UPDATE</button>
+                    </div>
+
+                </form>
 
                 <div className="accountPageDelete">
-                    <button>DELETE ACCOUNT</button>
+                    <button onClick={deleteHandler}>DELETE ACCOUNT</button>
                 </div>
 
             </div>

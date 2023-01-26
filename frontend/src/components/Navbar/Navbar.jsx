@@ -7,6 +7,7 @@ import { useContext } from 'react';
 function Navbar() {
 
     const { user, dispatch } = useContext(BlogContext);
+    // console.log(user);
 
     const logoutHandler = () => {
         dispatch({ type: 'LOGOUT' });
@@ -47,7 +48,7 @@ function Navbar() {
                     <ul className="nav-right-ul">
                         <li className="navListItem" onClick={logoutHandler}>LOGOUT</li>
                         <li className="navListItem">
-                            <Link to='/account/1' className='link'>
+                            <Link to={`/account/${user.userId}`} className='link'>
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF2O_c-gKI_IdbvA5TwW0mFgO-IXt784J7TQ&usqp=CAU" alt="image" />
                             </Link>
                         </li>
