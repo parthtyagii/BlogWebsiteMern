@@ -14,9 +14,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         // unique:true
     },
-    userId:{
-        type:String,
-        required:true
+    userImg: {
+        type: String,
+    },
+    userId: {
+        type: String,
+        required: true
     }
 });
 

@@ -17,8 +17,8 @@ function Registration() {
         e.preventDefault();
         setError(false);
         try {
-            const response = await axios.post('/auth/registration', { username, email, password, userId: uuid() });
-            // console.log(response);
+            const response = await axios.post('/auth/registration', { username, email, password, userId: uuid(), userImg:'sample.jpg' });
+            // console.log(response.data);
             return (response.data && window.location.replace('/login'));
         }
         catch (e) {

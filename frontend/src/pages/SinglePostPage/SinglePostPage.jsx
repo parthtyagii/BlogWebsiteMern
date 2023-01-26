@@ -13,13 +13,14 @@ import Blog from '../../components/Blog/Blog';
 
 function SinglePostPage() {
 
+    const URL = 'http://localhost:5000/postImages/';
+
     const [postInfo, setPostInfo] = useState({});
     const { user } = useContext(BlogContext);
     const { id } = useParams();
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState();
     const [desc, setDesc] = useState();
-
 
 
     const editHandler = async (e) => {
@@ -49,6 +50,7 @@ function SinglePostPage() {
 
             setPostInfo(response.data);
             setEdit(false);
+            window.location.replace(`/post/${id}`);
         }
         catch (e) {
             console.log('cannot update!');
@@ -71,8 +73,6 @@ function SinglePostPage() {
         getPostInfo();
     }, []);
 
-    // console.log(user)
-
     return (
         <>
             <Navbar />
@@ -80,7 +80,7 @@ function SinglePostPage() {
             <div className="singlePostContainer">
 
                 <div className="singlePostImg">
-                    <img src="https://wallpaperaccess.com/full/780293.jpg" alt="" />
+                    <img src={URL + postInfo.postImg} alt="" />
                 </div>
 
 

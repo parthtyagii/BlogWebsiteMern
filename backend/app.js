@@ -36,9 +36,44 @@ mongoose.connect("mongodb://localhost:27017/BlogMERN", {
 app.use('/blog/api/auth', authRoute);
 app.use('/blog/api/posts', postsRoute);
 app.use('/blog/api/user', userRoute);
-// app.use('/images', express.static(path.join(__dirname, '/profileImages')));
+app.use('/profileImages', express.static(path.join(__dirname, '/profileImages')));
+app.use('/postImages', express.static(path.join(__dirname, '/postImages')));
 
 //---------------------------------------------------------------------------
+
+const postStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'postImages');
+    },
+    filename: (req, file, cb) => {
+        cb(null, req.body.name);
+    }
+});
+
+const profileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'profileImages');
+    },
+    filename: (req, file, cb) => {
+        cb(null, req.body.name);
+    }
+});
+
+
+
+const postUpload = multer({ storage: postStorage });
+const profileUpload = multer({ storage: profileStorage });
+
+app.post('/blog/api/postImg', postUpload.single('file'), async (req, res) => {
+    res.json('post image has been uploaded!');
+})
+
+app.post('/blog/api/profileImg', profileUpload.single('file'), async (req, res) => {
+    console.log(req.file);
+    res.json('profile image has been uploaded!');
+})
+
+
 
 
 

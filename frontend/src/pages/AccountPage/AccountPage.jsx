@@ -12,26 +12,48 @@ import { useEffect } from 'react';
 
 function AccountPage() {
 
+    const url = 'http://localhost:5000/profileImages/';
+
     const { user, dispatch } = useContext(BlogContext);
     const [newUsername, setNewUsername] = useState('');
     const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [profileImage, setProfileImage] = useState(null);
+    const [file, setFile] = useState(null);
 
 
     const submitHandler = async (e) => {
         e.preventDefault();
         dispatch({ type: 'UPDATE_START' });
+        const newFormData = {
+            username: newUsername,
+            email: newEmail,
+            password: newPassword,
+        };
 
+        //image upload
+        if (file) {
+            try {
+                const formData = new FormData();
+                const fileName = Date.now() + file.name;
+                formData.append('name', fileName);
+                formData.append('file', file);
+                newFormData.userImg = fileName;
+
+                const response = await axios.post('/profileImg', formData);
+                console.log(response.data);
+            }
+            catch (e) {
+                console.log('cannot upload profile pic!');
+                console.log(e);
+            }
+        }
+
+        //update
         try {
-            const response = await axios.put(`/user/${user.userId}`, {
-                username: newUsername,
-                email: newEmail,
-                password: newPassword
-            });
-
+            const response = await axios.put(`/user/${user.userId}`, newFormData);
+            console.log(response.data);
             dispatch({ type: 'UPDATE_SUCCESS', payload: response.data });
-            window.location.replace(`/account/${user.userId}`);
+            // window.location.replace(`/account/${user.userId}`);
         }
         catch (e) {
             dispatch({ type: 'UPDATE_FAILURE' });
@@ -51,6 +73,7 @@ function AccountPage() {
         }
     }
 
+
     useEffect(() => {
         if (newUsername === '') {
             setNewUsername(user.username);
@@ -64,9 +87,8 @@ function AccountPage() {
             setNewPassword(user.password);
         }
 
-        // console.log(newUsername, newEmail, newPassword);
+    }, [newUsername, newEmail, newPassword, file]);
 
-    }, [newUsername, newEmail, newPassword]);
 
     return (
         <>
@@ -78,12 +100,19 @@ function AccountPage() {
                 <form onSubmit={submitHandler} encType="multipart/form-data">
 
                     <div className="accountPageImg">
-                        <img src="https://www.teahub.io/photos/full/298-2984607_jennifer-lawrence.jpg" alt="" />
+                        {file &&
+                            <img src={URL.createObjectURL(file)} alt="user_image" />
+                        }
+
+                        {!file &&
+                            <img src={url + user.userImg} alt="user_image" />
+                        }
+
 
                         <label htmlFor='accountPageProfilePic'>
                             <i className="fa-solid fa-plus"></i>
                         </label>
-                        <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} accept="image/*" name='accountPic' id='accountPageProfilePic' />
+                        <input type="file" onChange={(e) => setFile(e.target.files[0])} accept="image/*" name='accountPic' id='accountPageProfilePic' />
                     </div>
 
 

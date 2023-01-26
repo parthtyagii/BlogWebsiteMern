@@ -10,11 +10,9 @@ function Main() {
 
     const [posts, setPosts] = useState([]);
 
-
     const getPosts = async () => {
         try {
             const response = await axios.get('/posts/');
-            // console.log(response.data);
             setPosts(response.data);
         }
         catch (e) {
@@ -25,15 +23,14 @@ function Main() {
 
     useEffect(() => {
         getPosts();
-    }, [posts]);
+    }, []);  
 
     return (
         <div className='main-container'>
 
             {posts.map((post) => {
-                // console.log(post._id);
                 return (
-                    <Blog key={post._id} title={post.title} desc={post.desc} postId={post.postId} />
+                    <Blog key={post._id} userId={post.userId} username={post.username} title={post.title} desc={post.desc} postId={post.postId} postImg={post.postImg} />
                 );
             })}
 
