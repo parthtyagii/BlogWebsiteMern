@@ -70,7 +70,7 @@ function Navbar() {
                             <li className="navListItem logOut" onClick={logoutHandler}>
                                 <button>Logout</button>
                             </li>
-                            <li className="navListItem">
+                            <li className="navListItem listImage">
                                 <Link to={`/account/${user.userId}`} className='link'>
                                     <img src={url + user.userImg} alt="image" />
                                 </Link>

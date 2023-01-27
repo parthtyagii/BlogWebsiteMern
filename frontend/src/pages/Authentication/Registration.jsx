@@ -47,7 +47,7 @@ function Registration() {
                             <input type="text" placeholder='parth' onChange={(e) => setUsername(e.target.value)} value={username} />
 
                             <label>Email</label>
-                            <input type="text" placeholder='parth@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email} />
+                            <input type="email" placeholder='parth@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email} />
 
                             <label>Password</label>
                             <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} />

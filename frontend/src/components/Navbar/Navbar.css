@@ -85,7 +85,7 @@
     border-bottom: 0.2rem solid black;
 }
 
-.signIn:hover, .signUp:hover, .logOut:hover{
+.signIn:hover, .signUp:hover, .logOut:hover, .listImage:hover{
     border-bottom: none;
 }
 
