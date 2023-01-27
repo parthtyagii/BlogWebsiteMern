@@ -9,6 +9,10 @@ import { useEffect } from 'react';
 
 
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
 function CreateBlog() {
 
     const { user } = useContext(BlogContext);
@@ -20,12 +24,15 @@ function CreateBlog() {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        const date = new Date();
+
         const newFormData = {
             username,
             userId: user.userId,
             title: titleRef.current.value,
             desc: descRef.current.value,
             postId,
+            postDate: date.getDate().toString() + ' ' + monthNames[date.getMonth()] + ', ' + date.getFullYear().toString(),
         }
 
         //upload code

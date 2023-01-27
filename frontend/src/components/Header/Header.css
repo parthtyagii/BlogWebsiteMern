@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Luckiest+Guy&family=Roboto&display=swap');
+
+
+
+
+
+
+.headerContainer {
+    width: 100%;
+    height: 100vh;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pehla {
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 33%;
+    left: 20%;
+    font-size: 5rem;
+    font-family: 'Luckiest Guy', cursive;
+    font-weight: 100;
+}
+
+.doosra {
+    width: auto;
+    height: auto;
+    position: absolute;
+    position: absolute;
+    top: 49%;
+    left: 27%;
+    font-size: 5rem;
+    font-family: 'Luckiest Guy', cursive;
+    font-weight: 100;
+}
+
+.banner {
+    width: 100%;
+    height: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+}

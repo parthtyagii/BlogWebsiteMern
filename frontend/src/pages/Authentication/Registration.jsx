@@ -37,7 +37,7 @@ function Registration() {
                 <div className="authCredentials">
 
                     <div className="authTitle">
-                        Registration
+                        Sign Up
                     </div>
 
                     <form onSubmit={submitHandler}>
@@ -54,7 +54,7 @@ function Registration() {
                         </div>
 
                         <div className="authSubmit">
-                            <button type='submit'>REGISTER</button>
+                            <button type='submit'>SUBMIT</button>
                         </div>
 
                     </form>

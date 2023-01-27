@@ -6,11 +6,22 @@ import axios from 'axios';
 import { useState } from 'react';
 
 
-function Blog({ title, desc, postId, postImg, userId }) {
+function Blog({ title, desc, postId, postImg, userId, postDate }) {
 
     const url = 'http://localhost:5000/postImages/';
 
     const [userInfo, setUserInfo] = useState(null);
+
+
+    const getDesc = (str) => {
+        let words = str.split(" ");
+        words = words.filter((w) => {
+            return (w !== ' ');
+        })
+        words = words.splice(0, 40);
+        str = words.join(' ') + '...';
+        return str;
+    }
 
     const getUserInfo = async () => {
         try {
@@ -46,12 +57,14 @@ function Blog({ title, desc, postId, postImg, userId }) {
                 </div>
 
                 <div className="blogDesc">
-                    {desc}
+                    {
+                        getDesc(desc)
+                    }
                 </div>
             </Link>
 
             <div className="blogFooter">
-                January 10, 2023
+                {postDate}
             </div>
 
         </div>

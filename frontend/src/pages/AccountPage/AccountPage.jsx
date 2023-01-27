@@ -53,7 +53,7 @@ function AccountPage() {
             const response = await axios.put(`/user/${user.userId}`, newFormData);
             console.log(response.data);
             dispatch({ type: 'UPDATE_SUCCESS', payload: response.data });
-            // window.location.replace(`/account/${user.userId}`);
+            window.location.replace(`/account/${user.userId}`);
         }
         catch (e) {
             dispatch({ type: 'UPDATE_FAILURE' });

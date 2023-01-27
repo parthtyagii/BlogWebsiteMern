@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Dancing+Script&family=Quicksand&family=Roboto&display=swap');
 
 .blog-container {
-    width:95%;
+    width: 95%;
     height: auto;
     font-family: 'Noto Sans JP', sans-serif;
-    border:1px solid gray;
+    /* border-bottom: 1px solid gray; */
 
     display: flex;
     flex-direction: column;
@@ -27,16 +28,18 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 0.5rem;
 }
 
 .blogImg .authorImg {
     height: 50px;
     width: 50px;
     border-radius: 50px;
+    border:1px solid black;
 
     position: absolute;
-    top: 145px;
-    left: 330px;
+    right: 1rem;
+    bottom: -1.5rem;
 }
 
 .blogTitle {
@@ -61,19 +64,19 @@
 
 .blogDesc {
     width: 100%;
-    min-height: 00px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    height: 15vh;
+    /* padding-top: 5px;
+    padding-bottom: 5px; */
     padding-left: 15px;
     padding-right: 15px;
-    font-size: .9rem;
+    font-size: .7rem;
     font-weight: bolder;
     text-align: justify;
-    /* background-color: aqua; */
     letter-spacing: 1px;
-    font-family: 'Amatic SC', cursive;
+    /* word-spacing: 20px; */
+    /* background-color: antiquewhite; */
+    font-family: 'Quicksand', sans-serif;
     color: #495057;
-
 
     display: flex;
     justify-content: flex-start;
@@ -87,8 +90,8 @@
     padding-bottom: 5px;
     padding-left: 15px;
     padding-right: 15px;
-    font-size: .8rem;
-    font-family: 'Amatic SC', cursive;
+    font-size: .7rem;
+    font-family: 'Quicksand', sans-serif;
     font-weight: 600;
     letter-spacing: 1px;
     color: #6c757d;

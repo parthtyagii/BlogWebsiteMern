@@ -23,14 +23,14 @@ function Main() {
 
     useEffect(() => {
         getPosts();
-    }, []);  
+    }, []);
 
     return (
         <div className='main-container'>
 
             {posts.map((post) => {
                 return (
-                    <Blog key={post._id} userId={post.userId} username={post.username} title={post.title} desc={post.desc} postId={post.postId} postImg={post.postImg} />
+                    <Blog key={post._id} postDate={post.postDate} userId={post.userId} username={post.username} title={post.title} desc={post.desc} postId={post.postId} postImg={post.postImg} />
                 );
             })}
 

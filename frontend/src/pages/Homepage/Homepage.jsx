@@ -4,17 +4,17 @@ import Main from '../../components/Main/Main';
 import { BlogContext } from '../../context/Context';
 import { useContext } from 'react';
 import { useEffect } from 'react';
+import Header from '../../components/Header/Header';
 
 
 function Homepage() {
 
-    // const { user, dispatch } = useContext(BlogContext);
-    // console.log(user);
-
+    const { user, dispatch } = useContext(BlogContext);
 
     return (
         <>
             <Navbar />
+            <Header />
             <Main />
         </>
     );

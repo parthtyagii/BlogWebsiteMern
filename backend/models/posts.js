@@ -24,6 +24,10 @@ const postsSchema = new mongoose.Schema({
     postId: {
         type: String,
         required: true
+    },
+    postDate: {
+        type: String,
+        required: true
     }
 });
 

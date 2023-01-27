@@ -9,7 +9,7 @@ import { useReducer, useRef } from 'react';
 
 function Login() {
 
-    const { dispatch, user } = useContext(BlogContext);
+    const { dispatch, user, error } = useContext(BlogContext);
     const userRef = useRef();
     const passwordRef = useRef();
 
@@ -28,12 +28,11 @@ function Login() {
                 window.location.replace('/');
             }
             else {
-                console.log(response.data);
+                // console.log('fail ho gaya')
+                dispatch({ type: 'LOGIN_FAILURE' });
             }
-
         }
         catch (e) {
-            dispatch({ type: 'LOGIN_FAILURE' });
             console.log('error during login!');
             console.log(e);
         }
@@ -51,7 +50,7 @@ function Login() {
                     <form onSubmit={submitHandler}>
 
                         <div className="authTitle">
-                            Login
+                            Sign In
                         </div>
 
 
@@ -64,12 +63,18 @@ function Login() {
                         </div>
 
                         <div className="authSubmit">
-                            <button type='submit'>LOGIN</button>
+                            <button type='submit'>SUBMIT</button>
                         </div>
 
                     </form>
 
                 </div>
+
+                {error &&
+                    <div className="loginMessage">
+                        user not found!
+                    </div>
+                }
 
             </div>
 
