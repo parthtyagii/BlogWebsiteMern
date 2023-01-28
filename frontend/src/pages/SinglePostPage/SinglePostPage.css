@@ -181,3 +181,23 @@ form {
     width: auto;
     height: auto;
 }
+
+.singlePageMessage {
+    width: 20vw;
+    height: 5vh;
+    background-color: aqua;
+    font-size: .8rem;
+    font-weight: 500;
+    font-family: 'Noto Sans JP', sans-serif;
+    border-radius: 0.5rem;
+    background-color: #B3FFAE;
+
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    z-index: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

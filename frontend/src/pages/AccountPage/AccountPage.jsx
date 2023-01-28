@@ -5,7 +5,7 @@ import { BlogContext } from '../../context/Context';
 import { useContext } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 
 
@@ -15,23 +15,37 @@ function AccountPage() {
     const url = 'http://localhost:5000/profileImages/';
 
     const { user, dispatch } = useContext(BlogContext);
-    const [newUsername, setNewUsername] = useState('');
-    const [newEmail, setNewEmail] = useState('');
-    const [newPassword, setNewPassword] = useState('');
     const [file, setFile] = useState(null);
+    const nameRef = useRef('');
+    const emailRef = useRef('');
+    const passwordRef = useRef('');
+    const [accountPageMessage, setAccountPageMessage] = useState(false);
 
 
     const submitHandler = async (e) => {
         e.preventDefault();
         dispatch({ type: 'UPDATE_START' });
         const newFormData = {
-            username: newUsername,
-            email: newEmail,
-            password: newPassword,
+            username: nameRef.current.value || user.username,
+            email: emailRef.current.value || user.email,
+            password: passwordRef.current.value || user.password,
+            userImg: user.userImg,
         };
 
         //image upload
         if (file) {
+            if (user.userImg !== 'sample.jpg') {
+                try {
+                    const response = await axios.delete(`/profileImg/${user.userImg}`);
+                    // console.log(response);
+                }
+                catch (e) {
+                    console.log('cannot delete image!');
+                    console.log(e);
+                }
+            }
+
+
             try {
                 const formData = new FormData();
                 const fileName = Date.now() + file.name;
@@ -40,7 +54,6 @@ function AccountPage() {
                 newFormData.userImg = fileName;
 
                 const response = await axios.post('/profileImg', formData);
-                console.log(response.data);
             }
             catch (e) {
                 console.log('cannot upload profile pic!');
@@ -51,9 +64,14 @@ function AccountPage() {
         //update
         try {
             const response = await axios.put(`/user/${user.userId}`, newFormData);
-            console.log(response.data);
             dispatch({ type: 'UPDATE_SUCCESS', payload: response.data });
-            window.location.replace(`/account/${user.userId}`);
+            nameRef.current.value = '';
+            emailRef.current.value = '';
+            passwordRef.current.value = '';
+            setAccountPageMessage(true);
+            setTimeout(() => {
+                setAccountPageMessage(false);
+            }, 3000);
         }
         catch (e) {
             dispatch({ type: 'UPDATE_FAILURE' });
@@ -63,6 +81,18 @@ function AccountPage() {
     }
 
     const deleteHandler = async (e) => {
+        
+        if (user.userImg !== 'sample.jpg') {
+            try {
+                const response = await axios.delete(`/profileImg/${user.userImg}`);
+            }
+            catch (e) {
+                console.log('cannot delete image!');
+                console.log(e);
+            }
+        }
+
+
         try {
             const response = await axios.delete(`/user/${user.userId}`);
             dispatch({ type: 'LOGOUT' });
@@ -72,22 +102,6 @@ function AccountPage() {
             console.log(e);
         }
     }
-
-
-    useEffect(() => {
-        if (newUsername === '') {
-            setNewUsername(user.username);
-        }
-
-        if (newEmail === '') {
-            setNewEmail(user.email);
-        }
-
-        if (newPassword === '') {
-            setNewPassword(user.password);
-        }
-
-    }, [newUsername, newEmail, newPassword, file]);
 
 
     return (
@@ -119,13 +133,13 @@ function AccountPage() {
                     <div className="accountPageCredentials">
 
                         <label>Username</label>
-                        <input type="text" onChange={(e) => setNewUsername(e.target.value)} placeholder={`${user.username}`} />
+                        <input type="text" ref={nameRef} placeholder={`${user.username}`} />
 
                         <label>Email</label>
-                        <input type="email" onChange={(e) => setNewEmail(e.target.value)} placeholder={`${user.email}`} />
+                        <input type="email" ref={emailRef} placeholder={`${user.email}`} />
 
                         <label>Password</label>
-                        <input type="password" onChange={(e) => setNewPassword(e.target.value)} />
+                        <input type="password" ref={passwordRef} />
 
                     </div>
 
@@ -140,6 +154,12 @@ function AccountPage() {
                 </div>
 
             </div>
+
+            {accountPageMessage &&
+                <div className="accountPageMessage">
+                    user has been updated!
+                </div>
+            }
 
         </>
     );

@@ -46,6 +46,9 @@ function Navbar() {
                         <li className='navListItem'>
                             <Link onClick={handleClick} className='link'>CREATE</Link>
                         </li>
+                        <li className='navListItem'>
+                            <a href='https://github.com/parthtyagii/BlogWebsiteMern' className='link'>GitHub</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -84,7 +87,7 @@ function Navbar() {
 
             {error &&
                 <div className="navMessage">
-                    YOU ARE NOT LOGGED IN!!
+                    you are not logged in!
                 </div>
             }
 

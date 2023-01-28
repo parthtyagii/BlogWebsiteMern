@@ -21,6 +21,7 @@ function SinglePostPage() {
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState();
     const [desc, setDesc] = useState();
+    const [singlePageMessage, setSinglePageMessage] = useState(false);
 
 
     const editHandler = async (e) => {
@@ -30,6 +31,18 @@ function SinglePostPage() {
     }
 
     const deleteHandler = async (e) => {
+
+        try {
+            const response1 = await axios.get(`/posts/${id}`);
+
+            const response2 = await axios.delete(`/postImg/${response1.data.postImg}`);
+            console.log(response2);
+        }
+        catch (e) {
+            console.log('cannot delete image!');
+            console.log(e);
+        }
+
         try {
             const response = await axios.delete(`/posts/${id}`);
             window.location.replace('/');
@@ -50,7 +63,10 @@ function SinglePostPage() {
 
             setPostInfo(response.data);
             setEdit(false);
-            window.location.replace(`/post/${id}`);
+            setSinglePageMessage(true);
+            setTimeout(() => {
+                setSinglePageMessage(false);
+            }, 3000);
         }
         catch (e) {
             console.log('cannot update!');
@@ -91,7 +107,7 @@ function SinglePostPage() {
                                 {postInfo.title}
                             </div>
 
-                            {user && (user.username === postInfo.username) &&
+                            {user && (user.userId === postInfo.userId) &&
                                 <div className="singlePostEdit">
                                     <button onClick={editHandler}><i className="editIcon fa-regular fa-pen-to-square"></i></button>
                                     <button onClick={deleteHandler}><i className="editIcon fa-solid fa-trash-can"></i></button>
@@ -131,6 +147,13 @@ function SinglePostPage() {
                 }
 
             </div>
+
+            {singlePageMessage &&
+                <div className="singlePageMessage">
+                    post has been updated!
+                </div>
+            }
+
         </>
     )
 }

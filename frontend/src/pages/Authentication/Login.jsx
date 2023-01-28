@@ -5,6 +5,7 @@ import axios from 'axios';
 import { BlogContext } from '../../context/Context';
 import { useContext } from 'react';
 import { useReducer, useRef } from 'react';
+import { useState } from 'react';
 
 
 function Login() {
@@ -12,6 +13,7 @@ function Login() {
     const { dispatch, user, error } = useContext(BlogContext);
     const userRef = useRef();
     const passwordRef = useRef();
+    const [loginMessage, setLoginMessage] = useState(false);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -24,12 +26,16 @@ function Login() {
 
             if (response.data !== 'Wrong credentials!') {
                 dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
-                // console.log('You are logged in now!');
                 window.location.replace('/');
             }
             else {
-                // console.log('fail ho gaya')
                 dispatch({ type: 'LOGIN_FAILURE' });
+                userRef.current.value = '';
+                passwordRef.current.value = '';
+                setLoginMessage(true);
+                setTimeout(() => {
+                    setLoginMessage(false);
+                }, 3000);
             }
         }
         catch (e) {
@@ -70,7 +76,7 @@ function Login() {
 
                 </div>
 
-                {error &&
+                {loginMessage &&
                     <div className="loginMessage">
                         user not found!
                     </div>

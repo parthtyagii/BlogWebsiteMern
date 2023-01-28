@@ -33,6 +33,7 @@ function CreateBlog() {
             desc: descRef.current.value,
             postId,
             postDate: date.getDate().toString() + ' ' + monthNames[date.getMonth()] + ', ' + date.getFullYear().toString(),
+            postImg: 'sample.jpg',
         }
 
         //upload code
@@ -82,11 +83,11 @@ function CreateBlog() {
                             <i className="fa-solid fa-plus"></i>
                         </label>
                         <input id='inputImg' type="file" onChange={(e) => setFile(e.target.files[0])} className='createBlogTitleFile' />
-                        <input type="text" ref={titleRef} className='createBlogTitleText' placeholder='add title...' />
+                        <input type="text" ref={titleRef} className='createBlogTitleText' placeholder='add title' />
                     </div>
 
                     <div className="createBlogDesc">
-                        <textarea name="createBlogDesc" ref={descRef} placeholder='tell your story...'></textarea>
+                        <textarea name="createBlogDesc" ref={descRef} placeholder='tell your story'></textarea>
                     </div>
 
                     <div className="createBlogSubmit">

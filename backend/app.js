@@ -7,6 +7,7 @@ const userRoute = require('./routes/user');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 //---------------------------------------------------------------------------
 
@@ -68,9 +69,33 @@ app.post('/blog/api/postImg', postUpload.single('file'), async (req, res) => {
     res.json('post image has been uploaded!');
 })
 
+app.delete('/blog/api/postImg/:id', async (req, res) => {
+    const { id } = req.params;
+    fs.unlink(`./postImages/${id}`, (err) => {
+        if (err) {
+            res.status(500).send({ message: 'Failed to delete post image' });
+            return;
+        }
+        res.send({ message: 'post image deleted successfully' });
+    });
+})
+
+
+
+
 app.post('/blog/api/profileImg', profileUpload.single('file'), async (req, res) => {
-    console.log(req.file);
     res.json('profile image has been uploaded!');
+})
+
+app.delete('/blog/api/profileImg/:id', async (req, res) => {
+    const { id } = req.params;
+    fs.unlink(`./profileImages/${id}`, (err) => {
+        if (err) {
+            res.status(500).send({ message: 'Failed to delete profile image' });
+            return;
+        }
+        res.send({ message: 'profile image deleted successfully' });
+    });
 })
 
 
