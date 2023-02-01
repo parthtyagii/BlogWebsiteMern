@@ -11,6 +11,8 @@ const fs = require('fs');
 
 //---------------------------------------------------------------------------
 
+require('dotenv').config();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
@@ -19,8 +21,10 @@ app.use(cors({
 
 //---------------------------------------------------------------------------
 
+const URL = process.env.DB_URL || "mongodb://localhost:27017/BlogMERN";
+
 mongoose.set('strictQuery', false);
-mongoose.connect("mongodb://localhost:27017/BlogMERN", {
+mongoose.connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -65,6 +69,7 @@ const profileStorage = multer.diskStorage({
 const postUpload = multer({ storage: postStorage });
 const profileUpload = multer({ storage: profileStorage });
 
+// for post images upload and delete...
 app.post('/blog/api/postImg', postUpload.single('file'), async (req, res) => {
     res.json('post image has been uploaded!');
 })
@@ -81,8 +86,7 @@ app.delete('/blog/api/postImg/:id', async (req, res) => {
 })
 
 
-
-
+// for profile images upload and delete...
 app.post('/blog/api/profileImg', profileUpload.single('file'), async (req, res) => {
     res.json('profile image has been uploaded!');
 })
@@ -100,9 +104,7 @@ app.delete('/blog/api/profileImg/:id', async (req, res) => {
 
 
 
-
-
-
-app.listen(5000, () => {
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
     console.log("Server 5000 running!");
 })

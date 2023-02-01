@@ -35,8 +35,10 @@ function SinglePostPage() {
         try {
             const response1 = await axios.get(`/posts/${id}`);
 
-            const response2 = await axios.delete(`/postImg/${response1.data.postImg}`);
-            console.log(response2);
+            if (response1.data.postImg !== 'sample.jpg') {
+                const response2 = await axios.delete(`/postImg/${response1.data.postImg}`);
+                // console.log(response2);
+            }
         }
         catch (e) {
             console.log('cannot delete image!');
