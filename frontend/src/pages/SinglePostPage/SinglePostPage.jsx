@@ -13,8 +13,6 @@ import Blog from '../../components/Blog/Blog';
 
 function SinglePostPage() {
 
-    const URL = 'http://localhost:5000/postImages/';
-
     const [postInfo, setPostInfo] = useState({});
     const { user } = useContext(BlogContext);
     const { id } = useParams();
@@ -33,11 +31,10 @@ function SinglePostPage() {
     const deleteHandler = async (e) => {
 
         try {
-            const response1 = await axios.get(`/posts/${id}`);
+            const response1 = await axios.get(`${process.env.REACT_APP_BACKEND}/blog/api/posts/${id}`);
 
             if (response1.data.postImg !== 'sample.jpg') {
-                const response2 = await axios.delete(`/postImg/${response1.data.postImg}`);
-                // console.log(response2);
+                const response2 = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/postImg/${response1.data.postImg}`);
             }
         }
         catch (e) {
@@ -46,7 +43,7 @@ function SinglePostPage() {
         }
 
         try {
-            const response = await axios.delete(`/posts/${id}`);
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/posts/${id}`);
             window.location.replace('/');
         }
         catch (e) {
@@ -58,7 +55,7 @@ function SinglePostPage() {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`/posts/${id}`, {
+            const response = await axios.put(`${process.env.REACT_APP_BACKEND}/blog/api/posts/${id}`, {
                 title,
                 desc
             });
@@ -78,7 +75,7 @@ function SinglePostPage() {
 
     const getPostInfo = async () => {
         try {
-            const response = await axios.get(`/posts/${id}`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND}/blog/api/posts/${id}`);
             setPostInfo(response.data);
         }
         catch (e) {
@@ -98,7 +95,7 @@ function SinglePostPage() {
             <div className="singlePostContainer">
 
                 <div className="singlePostImg">
-                    <img src={URL + postInfo.postImg} alt="" />
+                    <img src={`${process.env.REACT_APP_BACKEND}/postImages/${postInfo.postImg}`} alt="post_image" />
                 </div>
 
 

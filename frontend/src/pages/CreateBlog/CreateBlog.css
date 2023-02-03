@@ -5,7 +5,6 @@
 .createBlogContainer {
     width: 100%;
     min-height: 100vh;
-    /* background-color: antiquewhite; */
     padding: 20px;
 
     display: flex;
@@ -17,7 +16,6 @@
 .createBlogImg {
     width: 70%;
     height: 40vh;
-    /* background-color: aqua; */
 
     display: flex;
     justify-content: center;
@@ -34,7 +32,6 @@
 .createBlogTitle {
     width: 70%;
     height: 10vh;
-    /* background-color: aqua; */
     margin-top: 1.5rem;
     margin-bottom: 1rem;
 
@@ -54,7 +51,6 @@
     border-radius: 50%;
     font-size: 23px;
     cursor: pointer;
-
 
     display: flex;
     justify-content: center;
@@ -76,7 +72,6 @@
 .createBlogDesc {
     width: 70%;
     height: auto;
-    /* background-color: aquamarine; */
 }
 
 .createBlogDesc textarea {
@@ -87,7 +82,6 @@
     font-family: 'Roboto', sans-serif;
     word-spacing: .2rem;
     border: none;
-    /* resize: none; */
 }
 
 .createBlogDesc textarea:focus {
@@ -97,7 +91,6 @@
 .createBlogSubmit {
     width: 70%;
     height: 10vh;
-    /* background-color: burlywood; */
     margin-top: 1rem;
     margin-bottom: 1rem;
 

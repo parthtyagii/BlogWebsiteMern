@@ -8,8 +8,6 @@ import BlogLogo from '../../BlogLogo.jpg';
 
 function Navbar() {
 
-    const url = 'http://localhost:5000/profileImages/';
-
     const { user, dispatch } = useContext(BlogContext);
     const [error, setError] = useState(false);
 
@@ -75,7 +73,7 @@ function Navbar() {
                             </li>
                             <li className="navListItem listImage">
                                 <Link to={`/account/${user.userId}`} className='link'>
-                                    <img src={url + user.userImg} alt="image" />
+                                    <img src={`${process.env.REACT_APP_BACKEND}/profileImages/${user.userImg}`} alt="image" />
                                 </Link>
                             </li>
                         </ul>

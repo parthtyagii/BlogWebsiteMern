@@ -12,7 +12,7 @@ function Main() {
 
     const getPosts = async () => {
         try {
-            const response = await axios.get('/posts/');
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND}/blog/api/posts/`);
             setPosts(response.data);
         }
         catch (e) {

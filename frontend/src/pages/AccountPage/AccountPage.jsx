@@ -12,8 +12,6 @@ import { useEffect, useRef } from 'react';
 
 function AccountPage() {
 
-    const url = 'http://localhost:5000/profileImages/';
-
     const { user, dispatch } = useContext(BlogContext);
     const [file, setFile] = useState(null);
     const nameRef = useRef('');
@@ -36,8 +34,7 @@ function AccountPage() {
         if (file) {
             if (user.userImg !== 'sample.jpg') {
                 try {
-                    const response = await axios.delete(`/profileImg/${user.userImg}`);
-                    // console.log(response);
+                    const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/profileImg/${user.userImg}`);
                 }
                 catch (e) {
                     console.log('cannot delete image!');
@@ -53,7 +50,7 @@ function AccountPage() {
                 formData.append('file', file);
                 newFormData.userImg = fileName;
 
-                const response = await axios.post('/profileImg', formData);
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/profileImg`, formData);
             }
             catch (e) {
                 console.log('cannot upload profile pic!');
@@ -63,7 +60,7 @@ function AccountPage() {
 
         //update
         try {
-            const response = await axios.put(`/user/${user.userId}`, newFormData);
+            const response = await axios.put(`${process.env.REACT_APP_BACKEND}/blog/api/user/${user.userId}`, newFormData);
             dispatch({ type: 'UPDATE_SUCCESS', payload: response.data });
             nameRef.current.value = '';
             emailRef.current.value = '';
@@ -81,10 +78,10 @@ function AccountPage() {
     }
 
     const deleteHandler = async (e) => {
-        
+
         if (user.userImg !== 'sample.jpg') {
             try {
-                const response = await axios.delete(`/profileImg/${user.userImg}`);
+                const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/profileImg/${user.userImg}`);
             }
             catch (e) {
                 console.log('cannot delete image!');
@@ -94,8 +91,9 @@ function AccountPage() {
 
 
         try {
-            const response = await axios.delete(`/user/${user.userId}`);
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/user/${user.userId}`);
             dispatch({ type: 'LOGOUT' });
+            window.location.replace('/');
         }
         catch (e) {
             console.log('cannot delete account!');
@@ -119,7 +117,7 @@ function AccountPage() {
                         }
 
                         {!file &&
-                            <img src={url + user.userImg} alt="user_image" />
+                            <img src={`${process.env.REACT_APP_BACKEND}/profileImages/${user.userImg}`} alt="user_image" />
                         }
 
 

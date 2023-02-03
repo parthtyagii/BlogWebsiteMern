@@ -45,7 +45,7 @@ function CreateBlog() {
                 formData.append('file', file);
                 newFormData.postImg = fileName;
 
-                const response = await axios.post('/postImg', formData);
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/postImg`, formData);
             }
             catch (e) {
                 console.log('cannot upload file!');
@@ -55,7 +55,7 @@ function CreateBlog() {
 
         //database code
         try {
-            const response = await axios.post('/posts/', newFormData);
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/posts/`, newFormData);
             window.location.replace(`/post/${postId}`);
         }
         catch (e) {

@@ -4,7 +4,6 @@
 .authContainer {
     width: 100%;
     min-height: 90vh;
-    /* background-color: beige; */
     padding: 3rem;
 
     display: flex;
@@ -16,7 +15,6 @@
 .authCredentials {
     width: 30%;
     min-height: 50vh;
-    /* background-color: aqua; */
 
     display: flex;
     flex-direction: column;
@@ -27,11 +25,9 @@
 .authTitle {
     width: 100%;
     min-height: 10vh;
-    /* background-color: bisque; */
     font-family: 'Roboto', sans-serif;
     font-size: 2rem;
     margin-bottom: 2rem;
-
 
     display: flex;
     justify-content: flex-start;
@@ -41,9 +37,7 @@
 .authInput {
     width: 100%;
     min-height: 30vh;
-    /* background-color: burlywood; */
     font-family: 'Roboto', sans-serif;
-
 
     display: flex;
     flex-direction: column;
@@ -80,7 +74,6 @@
 .authSubmit {
     width: 100%;
     min-height: 10vh;
-    /* background-color: cornflowerblue; */
     font-family: 'Roboto', sans-serif;
 
     display: flex;
@@ -145,12 +138,10 @@ form {
     border-radius: 0.5rem;
     background-color: #FF8B8B;
 
-
     position: fixed;
     bottom: 1rem;
     right: 2rem;
     z-index: 1;
-
 
     display: flex;
     justify-content: center;

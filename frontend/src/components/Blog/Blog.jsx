@@ -8,8 +8,6 @@ import { useState } from 'react';
 
 function Blog({ title, desc, postId, postImg, userId, postDate }) {
 
-    const url = 'http://localhost:5000/postImages/';
-
     const [userInfo, setUserInfo] = useState(null);
 
 
@@ -25,7 +23,7 @@ function Blog({ title, desc, postId, postImg, userId, postDate }) {
 
     const getUserInfo = async () => {
         try {
-            const response = await axios.get(`/user/${userId}`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND}/blog/api/user/${userId}`);
             setUserInfo(response.data);
         }
         catch (e) {
@@ -45,9 +43,9 @@ function Blog({ title, desc, postId, postImg, userId, postDate }) {
         <div className="blog-container">
 
             <div className="blogImg">
-                <img src={'http://localhost:5000/postImages/' + postImg} alt="post_image" />
+                <img src={`${process.env.REACT_APP_BACKEND}/postImages/` + postImg} alt="post_image" />
                 {userInfo &&
-                    <img className='authorImg' src={'http://localhost:5000/profileImages/' + userInfo.userImg} alt="user_image" />
+                    <img className='authorImg' src={`${process.env.REACT_APP_BACKEND}/profileImages/` + userInfo.userImg} alt="user_image" />
                 }
             </div>
 

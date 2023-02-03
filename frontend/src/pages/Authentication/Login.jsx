@@ -19,7 +19,7 @@ function Login() {
         e.preventDefault();
         dispatch({ type: 'LOGIN_START' });
         try {
-            const response = await axios.post('/auth/login', {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/auth/login`, {
                 username: userRef.current.value,
                 password: passwordRef.current.value
             });
@@ -62,10 +62,10 @@ function Login() {
 
                         <div className="authInput">
                             <label>Username</label>
-                            <input type="text" ref={userRef} placeholder='parth' />
+                            <input type="text" ref={userRef} placeholder='parth' required/>
 
                             <label>Password</label>
-                            <input type="password" ref={passwordRef} />
+                            <input type="password" ref={passwordRef} required/>
                         </div>
 
                         <div className="authSubmit">
