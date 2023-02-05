@@ -17,7 +17,11 @@ function Registration() {
         e.preventDefault();
         setError(false);
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/auth/registration`, { username, email, password, userId: uuid(), userImg: 'sample.jpg' });
+            const data = {
+                public_id: "profileImages/yaymwg5brzhvc5ww1pnb",
+                secure_url: "https://res.cloudinary.com/dw0up71e2/image/upload/v1675568191/profileImages/yaymwg5brzhvc5ww1pnb.webp"
+            };
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/auth/registration`, { username, email, password, userId: uuid(), userImg: data });
             return (response.data && window.location.replace('/login'));
         }
         catch (e) {

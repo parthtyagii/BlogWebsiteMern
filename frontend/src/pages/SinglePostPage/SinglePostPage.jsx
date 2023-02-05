@@ -33,14 +33,21 @@ function SinglePostPage() {
         try {
             const response1 = await axios.get(`${process.env.REACT_APP_BACKEND}/blog/api/posts/${id}`);
 
-            if (response1.data.postImg !== 'sample.jpg') {
-                const response2 = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/postImg/${response1.data.postImg}`);
+            try {
+                if (response1.data.postImg.public_id !== "postImages/ickfyvovuaaz8vvzgnn1") {
+                    const response2 = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/postImg?id=${response1.data.postImg.public_id}`);
+                }
+            }
+            catch (e) {
+                console.log('cannot delete image!');
+                console.log(e);
             }
         }
         catch (e) {
-            console.log('cannot delete image!');
+            console.log('cannot get post infos to delete it!');
             console.log(e);
         }
+
 
         try {
             const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/posts/${id}`);
@@ -88,16 +95,24 @@ function SinglePostPage() {
         getPostInfo();
     }, []);
 
+
     return (
         <>
             <Navbar />
 
             <div className="singlePostContainer">
 
-                <div className="singlePostImg">
-                    <img src={`${process.env.REACT_APP_BACKEND}/postImages/${postInfo.postImg}`} alt="post_image" />
-                </div>
+                {(!postInfo || !postInfo.postImg) &&
+                    <div className="singlePostImg">
+                        <img src='https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?cs=srgb&dl=pexels-pixabay-356079.jpg&fm=jpg' alt="post_image" />
+                    </div>
+                }
 
+                {postInfo && postInfo.postImg &&
+                    <div className="singlePostImg">
+                        <img src={postInfo.postImg.secure_url} alt="post_image" />
+                    </div>
+                }
 
                 {!edit &&
                     <>

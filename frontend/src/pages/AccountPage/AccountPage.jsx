@@ -32,9 +32,9 @@ function AccountPage() {
 
         //image upload
         if (file) {
-            if (user.userImg !== 'sample.jpg') {
+            if (user.userImg.public_id !== "profileImages/yaymwg5brzhvc5ww1pnb") {
                 try {
-                    const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/profileImg/${user.userImg}`);
+                    const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/profileImg?id=${user.userImg.public_id}`);
                 }
                 catch (e) {
                     console.log('cannot delete image!');
@@ -45,12 +45,10 @@ function AccountPage() {
 
             try {
                 const formData = new FormData();
-                const fileName = Date.now() + file.name;
-                formData.append('name', fileName);
                 formData.append('file', file);
-                newFormData.userImg = fileName;
 
                 const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/profileImg`, formData);
+                newFormData.userImg = response.data;
             }
             catch (e) {
                 console.log('cannot upload profile pic!');
@@ -77,11 +75,12 @@ function AccountPage() {
         }
     }
 
+
     const deleteHandler = async (e) => {
 
-        if (user.userImg !== 'sample.jpg') {
+        if (user.userImg.public_id !== "profileImages/yaymwg5brzhvc5ww1pnb") {
             try {
-                const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/profileImg/${user.userImg}`);
+                const response = await axios.delete(`${process.env.REACT_APP_BACKEND}/blog/api/profileImg?id=${ user.userImg.public_id }`);
             }
             catch (e) {
                 console.log('cannot delete image!');
@@ -117,7 +116,7 @@ function AccountPage() {
                         }
 
                         {!file &&
-                            <img src={`${process.env.REACT_APP_BACKEND}/profileImages/${user.userImg}`} alt="user_image" />
+                            <img src={user.userImg.secure_url} alt="user_image" />
                         }
 
 

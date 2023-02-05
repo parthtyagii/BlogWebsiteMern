@@ -43,9 +43,9 @@ function Blog({ title, desc, postId, postImg, userId, postDate }) {
         <div className="blog-container">
 
             <div className="blogImg">
-                <img src={`${process.env.REACT_APP_BACKEND}/postImages/` + postImg} alt="post_image" />
+                <img src={postImg.secure_url} alt="post_image" />
                 {userInfo &&
-                    <img className='authorImg' src={`${process.env.REACT_APP_BACKEND}/profileImages/` + userInfo.userImg} alt="user_image" />
+                    <img className='authorImg' src={userInfo.userImg.secure_url} alt="user_image" />
                 }
             </div>
 

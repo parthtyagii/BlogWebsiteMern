@@ -8,23 +8,32 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const fileUpload = require('express-fileupload');
+const cloudinary = require('cloudinary').v2;
 
 //---------------------------------------------------------------------------
 
 require('dotenv').config();
+cloudinary.config({
+    cloud_name: process.env.cloudName,
+    api_key: process.env.apiKey,
+    api_secret: process.env.apiSecret,
+    secure: true
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
     origin: "*"
 }))
+app.use(fileUpload({ useTempFiles: true }));
 
 //---------------------------------------------------------------------------
 
 const URL = process.env.DB_URL || "mongodb://localhost:27017/BlogMERN";
 
 mongoose.set('strictQuery', false);
-mongoose.connect(URL, {
+mongoose.connect("mongodb://localhost:27017/BlogMERN", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -44,63 +53,60 @@ app.use('/blog/api/user', userRoute);
 app.use('/profileImages', express.static(path.join(__dirname, '/profileImages')));
 app.use('/postImages', express.static(path.join(__dirname, '/postImages')));
 
-//---------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
-const postStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'postImages');
-    },
-    filename: (req, file, cb) => {
-        cb(null, req.body.name);
+//for post images upload / delete
+app.post('/blog/api/postImg', async (req, res) => {
+    try {
+        const FILE = req.files.file;
+        const response = await cloudinary.uploader.upload(FILE.tempFilePath, { folder: 'postImages' });
+        res.json(response);
     }
-});
-
-const profileStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'profileImages');
-    },
-    filename: (req, file, cb) => {
-        cb(null, req.body.name);
+    catch (e) {
+        console.log('cannot upload post image!');
+        console.log(e);
     }
-});
-
-
-
-const postUpload = multer({ storage: postStorage });
-const profileUpload = multer({ storage: profileStorage });
-
-// for post images upload and delete...
-app.post('/blog/api/postImg', postUpload.single('file'), async (req, res) => {
-    res.json('post image has been uploaded!');
 })
 
-app.delete('/blog/api/postImg/:id', async (req, res) => {
-    const { id } = req.params;
-    fs.unlink(`./postImages/${id}`, (err) => {
-        if (err) {
-            res.status(500).send({ message: 'Failed to delete post image' });
-            return;
-        }
-        res.send({ message: 'post image deleted successfully' });
-    });
+app.delete('/blog/api/postImg', async (req, res) => {
+    try {
+        const { id } = req.query;
+        const response = await cloudinary.uploader.destroy(id);
+        res.json(response);
+    }
+    catch (e) {
+        console.log('cannot delete post image!');
+        console.log(e);
+    }
 })
 
 
-// for profile images upload and delete...
-app.post('/blog/api/profileImg', profileUpload.single('file'), async (req, res) => {
-    res.json('profile image has been uploaded!');
+
+//for profile image upload / delete
+app.post('/blog/api/profileImg', async (req, res) => {
+    try {
+        const FILE = req.files.file;
+        const response = await cloudinary.uploader.upload(FILE.tempFilePath, { folder: 'profileImages' });
+        res.json(response);
+    }
+    catch (e) {
+        console.log('cannot upload profile image!');
+        console.log(e);
+    }
 })
 
-app.delete('/blog/api/profileImg/:id', async (req, res) => {
-    const { id } = req.params;
-    fs.unlink(`./profileImages/${id}`, (err) => {
-        if (err) {
-            res.status(500).send({ message: 'Failed to delete profile image' });
-            return;
-        }
-        res.send({ message: 'profile image deleted successfully' });
-    });
+app.delete('/blog/api/profileImg', async (req, res) => {
+    try {
+        const { id } = req.query;
+        const response = await cloudinary.uploader.destroy(id);
+        res.json(response);
+    }
+    catch (e) {
+        console.log('cannot delete post image!');
+        console.log(e);
+    }
 })
+
 
 
 

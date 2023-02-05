@@ -26,6 +26,7 @@ function CreateBlog() {
         e.preventDefault();
         const date = new Date();
 
+
         const newFormData = {
             username,
             userId: user.userId,
@@ -33,19 +34,20 @@ function CreateBlog() {
             desc: descRef.current.value,
             postId,
             postDate: date.getDate().toString() + ' ' + monthNames[date.getMonth()] + ', ' + date.getFullYear().toString(),
-            postImg: 'sample.jpg',
+            postImg: {
+                public_id: "postImages/ickfyvovuaaz8vvzgnn1",
+                secure_url: "https://res.cloudinary.com/dw0up71e2/image/upload/v1675568384/postImages/ickfyvovuaaz8vvzgnn1.jpg"
+            }
         }
 
         //upload code
         if (file) {
             try {
                 const formData = new FormData();
-                const fileName = Date.now() + file.name;
-                formData.append('name', fileName);
                 formData.append('file', file);
-                newFormData.postImg = fileName;
 
                 const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/postImg`, formData);
+                newFormData.postImg = response.data;
             }
             catch (e) {
                 console.log('cannot upload file!');

@@ -73,7 +73,7 @@ function Navbar() {
                             </li>
                             <li className="navListItem listImage">
                                 <Link to={`/account/${user.userId}`} className='link'>
-                                    <img src={`${process.env.REACT_APP_BACKEND}/profileImages/${user.userImg}`} alt="image" />
+                                    <img src={user.userImg.secure_url} alt="image" />
                                 </Link>
                             </li>
                         </ul>
