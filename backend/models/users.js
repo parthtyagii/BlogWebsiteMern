@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     },
     userImg: {
         type: Object,
-        // required: true
+        required: true
     },
     userId: {
         type: String,
