@@ -10,6 +10,7 @@ function Navbar() {
 
     const { user, dispatch } = useContext(BlogContext);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const logoutHandler = () => {
         dispatch({ type: 'LOGOUT' });

@@ -6,6 +6,7 @@ import { BlogContext } from '../../context/Context';
 import { useContext, useRef, useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import BarLoader from 'react-spinners/BarLoader';
 
 
 
@@ -21,11 +22,12 @@ function CreateBlog() {
     const postId = uuid();
     const [file, setFile] = useState(null);
     const username = JSON.parse(localStorage.getItem('user')).username;
+    const [loading, setLoading] = useState(false);
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const date = new Date();
-
 
         const newFormData = {
             username,
@@ -58,6 +60,7 @@ function CreateBlog() {
         //database code
         try {
             const response = await axios.post(`${process.env.REACT_APP_BACKEND}/blog/api/posts/`, newFormData);
+            setLoading(false);
             window.location.replace(`/post/${postId}`);
         }
         catch (e) {
@@ -66,39 +69,55 @@ function CreateBlog() {
         }
     };
 
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1500);
+    }, []);
+
     return (
         <>
             <Navbar />
 
-            <div className='createBlogContainer'>
+            {loading &&
+                <div className="createPageLoader">
+                    <BarLoader color="black" height='8px' width='200px' />
+                </div>
+            }
 
-                {file &&
-                    <div className="createBlogImg">
-                        <img src={URL.createObjectURL(file)} alt="post_image" />
-                    </div>
-                }
+            {!loading &&
 
-                <form onSubmit={submitHandler} encType="multipart/form-data">
+                <div className='createBlogContainer'>
 
-                    <div className="createBlogTitle">
-                        <label htmlFor="inputImg" >
-                            <i className="fa-solid fa-plus"></i>
-                        </label>
-                        <input id='inputImg' type="file" onChange={(e) => setFile(e.target.files[0])} className='createBlogTitleFile' />
-                        <input type="text" ref={titleRef} className='createBlogTitleText' placeholder='add title' />
-                    </div>
+                    {file &&
+                        <div className="createBlogImg">
+                            <img src={URL.createObjectURL(file)} alt="post_image" />
+                        </div>
+                    }
 
-                    <div className="createBlogDesc">
-                        <textarea name="createBlogDesc" ref={descRef} placeholder='tell your story'></textarea>
-                    </div>
+                    <form onSubmit={submitHandler} encType="multipart/form-data">
 
-                    <div className="createBlogSubmit">
-                        <button>SUBMIT</button>
-                    </div>
+                        <div className="createBlogTitle">
+                            <label htmlFor="inputImg" >
+                                <i className="fa-solid fa-plus"></i>
+                            </label>
+                            <input id='inputImg' type="file" onChange={(e) => setFile(e.target.files[0])} className='createBlogTitleFile' />
+                            <input type="text" ref={titleRef} className='createBlogTitleText' placeholder='add title' />
+                        </div>
 
-                </form>
+                        <div className="createBlogDesc">
+                            <textarea name="createBlogDesc" ref={descRef} placeholder='tell your story'></textarea>
+                        </div>
 
-            </div>
+                        <div className="createBlogSubmit">
+                            <button>SUBMIT</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            }
         </>
     );
 }

@@ -128,7 +128,7 @@ form {
     align-items: center;
 }
 
-.loginMessage{
+.loginMessage {
     width: 20vw;
     height: 5vh;
     background-color: aqua;
@@ -142,6 +142,15 @@ form {
     bottom: 1rem;
     right: 2rem;
     z-index: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.authLoader {
+    width: 100vw;
+    height: 90vh;
 
     display: flex;
     justify-content: center;

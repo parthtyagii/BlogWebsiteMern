@@ -1,9 +1,11 @@
 import React from 'react';
 import './Authentication.css';
 import Navbar from '../../components/Navbar/Navbar';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
+import BarLoader from 'react-spinners/BarLoader';
+
 
 
 function Registration() {
@@ -12,6 +14,8 @@ function Registration() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
+
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -31,40 +35,55 @@ function Registration() {
         }
     };
 
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1500);
+    }, []);
+
     return (
         <>
             <Navbar />
 
-            <div className='authContainer'>
+            {loading &&
+                <div className="authLoader">
+                    <BarLoader color="black" height='8px' width='200px' />
+                </div>
+            }
 
-                <div className="authCredentials">
+            {!loading &&
+                <div className='authContainer'>
 
-                    <div className="authTitle">
-                        Sign Up
+                    <div className="authCredentials">
+
+                        <div className="authTitle">
+                            Sign Up
+                        </div>
+
+                        <form onSubmit={submitHandler}>
+
+                            <div className="authInput">
+                                <label>Username</label>
+                                <input type="text" placeholder='parth' onChange={(e) => setUsername(e.target.value)} value={username} />
+
+                                <label>Email</label>
+                                <input type="email" placeholder='parth@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email} />
+
+                                <label>Password</label>
+                                <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                            </div>
+
+                            <div className="authSubmit">
+                                <button type='submit'>SUBMIT</button>
+                            </div>
+
+                        </form>
+
                     </div>
 
-                    <form onSubmit={submitHandler}>
-
-                        <div className="authInput">
-                            <label>Username</label>
-                            <input type="text" placeholder='parth' onChange={(e) => setUsername(e.target.value)} value={username} />
-
-                            <label>Email</label>
-                            <input type="email" placeholder='parth@gmail.com' onChange={(e) => setEmail(e.target.value)} value={email} />
-
-                            <label>Password</label>
-                            <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} />
-                        </div>
-
-                        <div className="authSubmit">
-                            <button type='submit'>SUBMIT</button>
-                        </div>
-
-                    </form>
-
                 </div>
-
-            </div>
+            }
 
         </>
     );

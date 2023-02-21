@@ -6,24 +6,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 
-function Main() {
-
-    const [posts, setPosts] = useState([]);
-
-    const getPosts = async () => {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND}/blog/api/posts/`);
-            setPosts(response.data);
-        }
-        catch (e) {
-            console.log('cannot get all posts!');
-            console.log(e);
-        }
-    };
-
-    useEffect(() => {
-        getPosts();
-    }, []);
+function Main({ posts }) {
 
     return (
         <div className='main-container'>
